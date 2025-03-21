@@ -6,6 +6,7 @@ import { memo, useEffect, useState } from "react";
 import * as restApi from "@/services/api/rest";
 import LoadingPlaceholder from "../LoadingPlaceholder";
 import { formatTemperature } from "@/services/utils/temperature";
+import { ArrowUpIcon } from "@heroicons/react/24/outline";
 
 interface ITodayWeatherProps {
   lat?: string;
@@ -16,6 +17,7 @@ interface ITodayWeatherItemProps {
   label: string;
   value: number;
   unit: string;
+  direction?: React.ReactNode;
 }
 function TodayWeather({ city }: ITodayWeatherProps) {
   const [weather, setWeather] = useState<IWeather>();
@@ -51,6 +53,7 @@ function TodayWeather({ city }: ITodayWeatherProps) {
 
   const current = weather.weather[0];
   const icon = WEATHER_IMAGES_2X[current.icon];
+  const windStyle = { transform: `rotate(${weather.wind.deg}deg)` };
   return (
     <BoxContent>
       <h2>Today's Weather</h2>
@@ -69,7 +72,16 @@ function TodayWeather({ city }: ITodayWeatherProps) {
           value={weather.main.humidity}
           unit={"%"}
         />
-        <WeatherItem label="Wind" value={weather.wind.speed} unit={"m/s"} />
+        <WeatherItem
+          direction={
+            <div style={windStyle}>
+              <ArrowUpIcon className={`size-5`} />
+            </div>
+          }
+          label="Wind"
+          value={weather.wind.speed}
+          unit={"m/s"}
+        />
         <WeatherItem
           label="Visibility"
           value={weather.visibility / 1000}
@@ -82,11 +94,17 @@ function TodayWeather({ city }: ITodayWeatherProps) {
 
 export default memo(TodayWeather);
 
-function WeatherItem({ label, value, unit }: ITodayWeatherItemProps) {
+function WeatherItem({
+  label,
+  value,
+  unit,
+  direction,
+}: ITodayWeatherItemProps) {
   return (
     <div className="flex flex-col items-center">
       <p className="text-gray-500 text-sm">{label}</p>
       <div className="flex items-center">
+        {direction}
         <p className="font-medium text-xl">{value}</p>
         <sup className="top-0">{unit}</sup>
       </div>
