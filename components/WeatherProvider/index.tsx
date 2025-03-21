@@ -45,7 +45,8 @@ export function WeatherProvider({ children }: { children: React.ReactNode }) {
           lat,
           lon
         );
-        const locationName = `${forecast.city.name},${forecast.city.country}`;
+        const { city: { name, country } } = forecast;
+        const locationName = `${name},${country}`;
         localStorageHelpers.set(constantHelpers.CITY, locationName);
         setCity(locationName);
       } catch (error) {

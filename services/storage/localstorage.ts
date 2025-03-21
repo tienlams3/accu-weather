@@ -1,6 +1,6 @@
 import { decryptData, encryptData } from "./encrypt";
 
-export default {
+const storage = {
   set: (name: string, value: string) => {
     const data = encryptData(value);
     localStorage.setItem(name, data);
@@ -16,3 +16,5 @@ export default {
     localStorage.removeItem(name);
   },
 };
+
+export default storage;

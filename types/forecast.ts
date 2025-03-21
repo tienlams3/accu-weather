@@ -21,7 +21,7 @@ export interface ICity {
 
 export interface IForecastItem {
   dt: number;
-  main: IMainClass;
+  main: IMain;
   weather: IWeather[];
   clouds: IClouds;
   wind: IWind;
@@ -31,7 +31,7 @@ export interface IForecastItem {
   dt_txt: Date;
 }
 
-interface IMainClass {
+interface IMain {
   temp: number;
   feels_like: number;
   temp_min: number;

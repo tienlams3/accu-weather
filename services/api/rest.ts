@@ -9,7 +9,7 @@ export async function getForecast(city?: string, lat?: string, lon?: string) {
   }
   const url = `/api/forecast?${params}`;
   if (!cache.has(url)) {
-    const result = await fecthData(url);
+    const result = await fetchData(url);
     cache.set(url, result);
   }
   return cache.get(url);
@@ -20,13 +20,13 @@ export async function getWeather(city?: string) {
   if (city) params.set("city", city);
   const url = `/api/weather?${params}`;
   if (!cache.has(url)) {
-    const result = await fecthData(url);
+    const result = await fetchData(url);
     cache.set(url, result);
   }
   return cache.get(url);
 }
 
-async function fecthData(url: string) {
+async function fetchData(url: string) {
   try {
     const res = await fetch(url);
     if (!res.ok) throw new Error("Failed to fetch data");

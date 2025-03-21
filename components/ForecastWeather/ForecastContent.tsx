@@ -10,8 +10,9 @@ interface IForecastContentProps {
 function ForecastContent({ forecast }: IForecastContentProps) {
   const forecasts = useMemo(() => {
     const items = new Map();
-    for (let i = 0; i < forecast.list.length; i++) {
-      const item = forecast.list[i];
+    const list = forecast.list;
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i];
       const key = moment(item.dt_txt).format("YYYY-MM-DD");
       const value = items.get(key) ?? [];
       items.set(key, [...value, item]);

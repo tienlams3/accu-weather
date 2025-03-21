@@ -20,7 +20,7 @@ interface ITodayWeatherItemProps {
   direction?: React.ReactNode;
 }
 function TodayWeather({ city }: ITodayWeatherProps) {
-  const [weather, setWeather] = useState<IWeather>();
+  const [currentWeather, setCurrentWeather] = useState<IWeather>();
 
   useEffect(() => {
     if (!city) return;
@@ -28,7 +28,7 @@ function TodayWeather({ city }: ITodayWeatherProps) {
     async function fetchWeather() {
       try {
         const res = await restApi.getWeather(city);
-        setWeather(res);
+        setCurrentWeather(res);
       } catch (error) {
         console.error("Error fetching weather:", error);
       }
@@ -46,30 +46,32 @@ function TodayWeather({ city }: ITodayWeatherProps) {
       </BoxContent>
     );
 
-  if (!weather)
+  if (!currentWeather)
     return (
       <LoadingPlaceholder height="120px" className="mb-3 rounded-[20px]" />
     );
 
-  const current = weather.weather[0];
-  const icon = WEATHER_IMAGES_2X[current.icon];
-  const windStyle = { transform: `rotate(${weather.wind.deg}deg)` };
+  const { weather, main, wind, visibility } = currentWeather;
+  const { temp, humidity } = main;
+  const { deg, speed } = wind;
+  const { description, icon } = weather[0] ?? {}
+  const windStyle = { transform: `rotate(${deg}deg)` };
   return (
     <BoxContent>
       <h2>Today's Weather</h2>
       <div className="flex items-center justify-center">
-        <Image src={icon} width={100} height={100} alt={current.description} />
+        <Image src={WEATHER_IMAGES_2X[icon]} width={100} height={100} alt={description} />
         <div>
           <h2 className="text-3xl font-extrabold">
-            {formatTemperature(weather.main.temp, 0)}
+            {formatTemperature(temp, 0)}
           </h2>
-          <p className="capitalize">{current.description}</p>
+          <p className="capitalize">{description}</p>
         </div>
       </div>
       <div className="mt-2 flex justify-around">
         <WeatherItem
           label="Humitity"
-          value={weather.main.humidity}
+          value={humidity}
           unit={"%"}
         />
         <WeatherItem
@@ -79,12 +81,12 @@ function TodayWeather({ city }: ITodayWeatherProps) {
             </div>
           }
           label="Wind"
-          value={weather.wind.speed}
+          value={speed}
           unit={"m/s"}
         />
         <WeatherItem
           label="Visibility"
-          value={weather.visibility / 1000}
+          value={visibility / 1000}
           unit={"km"}
         />
       </div>

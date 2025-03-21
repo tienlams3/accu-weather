@@ -10,8 +10,9 @@ interface IForecastItemProps {
 }
 
 function ForecastItem({ item }: IForecastItemProps) {
-  const weather = item.weather[0];
-  const icon = WEATHER_IMAGES[weather.icon];
+  const { main, weather } = item;
+  const { description, icon } = weather[0];
+  const { temp_max, temp_min } = main;
   return (
     <li>
       <div className="flex items-center justify-center max-[500px]:flex-col max-[500px]:items-start ">
@@ -21,17 +22,17 @@ function ForecastItem({ item }: IForecastItemProps) {
           </div>
           <div className="flex items-center ml-3">
             <NextImage
-              src={icon}
+              src={WEATHER_IMAGES[icon]}
               width={50}
               height={50}
-              alt={weather.description}
+              alt={description}
             />
             <div>
-              {format2Temperature(item.main?.temp_max, item.main.temp_min)}
+              {format2Temperature(temp_max, temp_min)}
             </div>
           </div>
         </div>
-        <p className="text-gray-500 text-sm">{weather.description}</p>
+        <p className="text-gray-500 text-sm">{description}</p>
       </div>
     </li>
   );

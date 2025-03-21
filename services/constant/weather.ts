@@ -1,6 +1,7 @@
-export const WEATHER_IMAGES: {
+interface IWeatherImage {
   [key: string]: string;
-} = {
+}
+export const WEATHER_IMAGES: IWeatherImage = {
   "01d": "https://openweathermap.org/img/wn/01d.png",
   "02d": "https://openweathermap.org/img/wn/02d.png",
   "03d": "https://openweathermap.org/img/wn/03d.png",
@@ -21,9 +22,7 @@ export const WEATHER_IMAGES: {
   "50n": "https://openweathermap.org/img/wn/50n.png",
 };
 
-export const WEATHER_IMAGES_2X: {
-  [key: string]: string;
-} = {
+export const WEATHER_IMAGES_2X: IWeatherImage = {
   "01d": "https://openweathermap.org/img/wn/01d@2x.png",
   "02d": "https://openweathermap.org/img/wn/02d@2x.png",
   "03d": "https://openweathermap.org/img/wn/03d@2x.png",
