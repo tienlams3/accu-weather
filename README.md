@@ -39,8 +39,8 @@ This is a Next.js weather forecast application that allows users to search for w
 1. Clone the repository:
 
    ```sh
-   git clone <repo_url>
-   cd <project_folder>
+   git clone https://github.com/tienlams3/accu-weather
+   cd accu_weather
    ```
 
 2. Install dependencies:
@@ -69,6 +69,11 @@ This is a Next.js weather forecast application that allows users to search for w
 - LocalStorage (with encryption)
 - JavaScript (ES6+)
 - Tailwind
+
+## Pages
+
+Like this image: ![Home page](assets/images/README-home-page.png)
+Like this image: ![Search page](assets/images/README-search-page.png)
 
 ## License
 
