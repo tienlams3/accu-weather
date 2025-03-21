@@ -1,13 +1,13 @@
 import { IForecast } from "@/types/forecast";
 import moment from "moment";
-import { useMemo } from "react";
-import { BoxContent } from "../BoxContent";
-import { ForcecastItemGroup } from "./ForecastItemGroup";
+import { memo, useMemo } from "react";
+import BoxContent from "../BoxContent";
+import ForcecastItemGroup from "./ForecastItemGroup";
 interface IForecastContentProps {
   forecast: IForecast;
 }
 
-export function ForecastContent({ forecast }: IForecastContentProps) {
+function ForecastContent({ forecast }: IForecastContentProps) {
   const forecasts = useMemo(() => {
     const items = new Map();
     for (let i = 0; i < forecast.list.length; i++) {
@@ -29,3 +29,5 @@ export function ForecastContent({ forecast }: IForecastContentProps) {
 
   return <BoxContent>{render5daysForecast()}</BoxContent>;
 }
+
+export default memo(ForecastContent);

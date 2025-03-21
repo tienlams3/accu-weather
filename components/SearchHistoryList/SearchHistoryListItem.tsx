@@ -3,14 +3,14 @@
 import { useLocation } from "@/hooks/useLocation";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 
 interface ISearchHistoryListItemProps {
   locationName: string;
   onRemove: (name: string) => void;
 }
 
-export default function SearchHistoryListItem({
+function SearchHistoryListItem({
   locationName,
   onRemove,
 }: ISearchHistoryListItemProps) {
@@ -44,3 +44,5 @@ export default function SearchHistoryListItem({
     </li>
   );
 }
+
+export default memo(SearchHistoryListItem);

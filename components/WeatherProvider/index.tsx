@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import { WeatherHeader } from "@/components/WeatherHeader";
+import WeatherHeader from "@/components/WeatherHeader";
 import localStorageHelpers from "@/services/storage/localstorage";
 import * as constantHelpers from "@/services/constant";
 import * as restApi from "@/services/api/rest";

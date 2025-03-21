@@ -1,13 +1,13 @@
 "use client";
 import { useLocation } from "@/hooks/useLocation";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import localStorageHelpers from "@/services/storage/localstorage";
 import * as constantHelpers from "@/services/constant";
 import * as restApi from "@/services/api/rest";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
-export default function SearchInput() {
+function SearchInput() {
   const { setCity } = useLocation();
   const [error, setError] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
@@ -79,3 +79,5 @@ export default function SearchInput() {
     </div>
   );
 }
+
+export default memo(SearchInput);

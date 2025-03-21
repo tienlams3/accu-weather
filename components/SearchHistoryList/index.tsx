@@ -1,12 +1,12 @@
-import { BoxContent } from "../BoxContent";
+import BoxContent from "../BoxContent";
 import SearchHistoryListItem from "./SearchHistoryListItem";
 import EmptyImg from "@/assets/images/empty.png";
 import NextImage from "next/image";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, memo } from "react";
 import localStorageHelpers from "@/services/storage/localstorage";
 import * as constantHelpers from "@/services/constant";
 
-export default function SearchHistoryList() {
+function SearchHistoryList() {
   const [searchHistories, setSearchHistories] = useState<string[]>([]);
 
   useEffect(() => {
@@ -57,3 +57,5 @@ export default function SearchHistoryList() {
     </div>
   );
 }
+
+export default memo(SearchHistoryList);

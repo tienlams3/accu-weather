@@ -3,12 +3,13 @@ import { format2Temperature } from "@/services/utils/temperature";
 import { IForecastItem } from "@/types/forecast";
 import moment from "moment";
 import NextImage from "next/image";
+import { memo } from "react";
 
 interface IForecastItemProps {
   item: IForecastItem;
 }
 
-export function ForecastItem({ item }: IForecastItemProps) {
+function ForecastItem({ item }: IForecastItemProps) {
   const weather = item.weather[0];
   const icon = WEATHER_IMAGES[weather.icon];
   return (
@@ -35,3 +36,5 @@ export function ForecastItem({ item }: IForecastItemProps) {
     </li>
   );
 }
+
+export default memo(ForecastItem);

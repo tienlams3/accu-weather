@@ -2,10 +2,11 @@
 import { MagnifyingGlassIcon, MapPinIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { memo } from "react";
 interface IWeatherHeaderProps {
   city?: string;
 }
-export function WeatherHeader({ city }: IWeatherHeaderProps) {
+function WeatherHeader({ city }: IWeatherHeaderProps) {
   const pathname = usePathname();
   return (
     <div className="flex justify-between mb-2 items-center">
@@ -21,3 +22,5 @@ export function WeatherHeader({ city }: IWeatherHeaderProps) {
     </div>
   );
 }
+
+export default memo(WeatherHeader);

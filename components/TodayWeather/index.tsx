@@ -1,8 +1,8 @@
 import { IWeather } from "@/types/weather";
-import { BoxContent } from "../BoxContent";
+import BoxContent from "../BoxContent";
 import { WEATHER_IMAGES_2X } from "@/services/constant";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import * as restApi from "@/services/api/rest";
 import LoadingPlaceholder from "../LoadingPlaceholder";
 import { formatTemperature } from "@/services/utils/temperature";
@@ -17,11 +17,11 @@ interface ITodayWeatherItemProps {
   value: number;
   unit: string;
 }
-export default function TodayWeather({ city }: ITodayWeatherProps) {
+function TodayWeather({ city }: ITodayWeatherProps) {
   const [weather, setWeather] = useState<IWeather>();
 
   useEffect(() => {
-    if (!city) return
+    if (!city) return;
 
     async function fetchWeather() {
       try {
@@ -34,8 +34,15 @@ export default function TodayWeather({ city }: ITodayWeatherProps) {
     fetchWeather();
   }, [city]);
 
-
-  if (!city) return <BoxContent><h2>Today's Weather</h2><div className='flex items-center justify-center h-[80px] text-gray-300'>No data</div></BoxContent>
+  if (!city)
+    return (
+      <BoxContent>
+        <h2>Today's Weather</h2>
+        <div className="flex items-center justify-center h-[80px] text-gray-300">
+          No data
+        </div>
+      </BoxContent>
+    );
 
   if (!weather)
     return (
@@ -72,6 +79,8 @@ export default function TodayWeather({ city }: ITodayWeatherProps) {
     </BoxContent>
   );
 }
+
+export default memo(TodayWeather);
 
 function WeatherItem({ label, value, unit }: ITodayWeatherItemProps) {
   return (
