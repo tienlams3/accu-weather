@@ -72,8 +72,13 @@ This is a Next.js weather forecast application that allows users to search for w
 
 ## Pages
 
-Like this image: ![Home page](assets/images/README-home-page.png)
-Like this image: ![Search page](assets/images/README-search-page.png)
+### Home page
+
+![Home page](assets/images/README-home-page.png)
+
+### Search page
+
+![Search page](assets/images/README-search-page.png)
 
 ## License
 
