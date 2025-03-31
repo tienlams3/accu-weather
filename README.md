@@ -62,6 +62,7 @@ This is a Next.js weather forecast application that allows users to search for w
    yarn dev
    ```
 
+## Technologies Used
 
 - Next.js (App Router)
 - OpenWeather API

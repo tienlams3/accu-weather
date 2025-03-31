@@ -5,11 +5,13 @@ async function getForecast(city?: string, lat?: string, lon?: string) {
 
   if (city) params.append("q", city);
   if (lat && lon) {
+    params.append("lat", lat);
+    params.append("lon", lon);
   }
 
   try {
     return await openWeatherApi.get("/forecast", { params });
-  } catch (error) {
+  } catch (error: any) {
     throw error;
   }
 }
